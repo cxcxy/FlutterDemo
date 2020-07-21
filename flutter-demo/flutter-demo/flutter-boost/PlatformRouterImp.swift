@@ -18,6 +18,7 @@ class PlatformRouterImp: NSObject, FLBPlatform {
         if url == "TwoViewController" {
             let vc = TwoViewController ()
             self.navigationController().pushViewController(vc, animated: true)
+            print(urlParams)
             completion(true);
             return
         }

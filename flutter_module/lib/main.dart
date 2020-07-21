@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boost/flutter_boost.dart';
 import 'dart:async';
-
+import './router/flutter_native.dart';
 // import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/// Flutter 与 iOS 之间的互相跳转 传值
 void main() => runApp(MyIosApp());
 
 class FLutterIosValueDemo extends StatefulWidget {
@@ -57,31 +58,6 @@ class _FLutterIosValueDemoState extends State<FLutterIosValueDemo> {
   }
 }
 
-class TestHello extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Center(
-        child: RaisedButton(
-      child: Text("Flutter 打开 native"),
-      onPressed: () {
-        FlutterBoost.singleton.open("TwoViewController").then((Map value) {
-          print(
-              "call me when page is finished. did recieve native route result $value");
-        });
-      },
-    )
-
-        // Text(
-        //   'hello3',
-        //   textDirection: TextDirection.ltr, // 文字阅读方向
-        //   style: TextStyle(
-        //       fontSize: 40, fontWeight: FontWeight.bold, color: Colors.yellow),
-        // ),
-        );
-  }
-}
-
 class _MyHomePageVlueState extends State<MyHomePage> {
   String _nativeCallBackValue = '等待原生传值';
 
@@ -120,28 +96,6 @@ class _MyHomePageVlueState extends State<MyHomePage> {
             Container(child: Text(_nativeCallBackValue))
           ],
         ));
-  }
-}
-
-class MyIosApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyIosApp> {
-  @override
-  void initState() {
-    super.initState();
-    FlutterBoost.singleton
-        .registerPageBuilders({'first': (pageName, params, _) => TestHello()});
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Boost example',
-        builder: FlutterBoost.init(),
-        home: Container(color: Colors.white));
   }
 }
 
