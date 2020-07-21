@@ -132,8 +132,8 @@ class _MyAppState extends State<MyIosApp> {
   @override
   void initState() {
     super.initState();
-    FlutterBoost.singleton.registerPageBuilders(
-        {'first': (pageName, params, _) => FLutterIosValueDemo()});
+    FlutterBoost.singleton
+        .registerPageBuilders({'first': (pageName, params, _) => TestHello()});
   }
 
   @override
