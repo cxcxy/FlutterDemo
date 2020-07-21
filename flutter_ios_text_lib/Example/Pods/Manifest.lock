@@ -1,0 +1,16 @@
+PODS:
+  - flutter_ios_text_lib (0.1.0)
+
+DEPENDENCIES:
+  - flutter_ios_text_lib (from `../`)
+
+EXTERNAL SOURCES:
+  flutter_ios_text_lib:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  flutter_ios_text_lib: 5facc203a562f7d471c4fda1a4b8914dc503f8a8
+
+PODFILE CHECKSUM: 5cd79009d006d4e247a7cb83923a0328de51d625
+
+COCOAPODS: 1.9.3

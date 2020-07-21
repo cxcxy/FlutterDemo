@@ -1,0 +1,6 @@
+use_frameworks!
+target 'flutter_ios_text_lib_Tests' do
+  pod 'flutter_ios_text_lib', :path => '../'
+  
+  
+end
