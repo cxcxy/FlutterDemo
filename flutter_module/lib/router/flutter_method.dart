@@ -39,24 +39,43 @@ class _MethodDemoState extends State<MethodDemo> {
 
   //Dart调用Native方法，并接收返回值。
   _iOSPushToVC() async {
-    title =
-        await methodChannel.invokeMethod('FlutterToNative', {"type": "221133"});
-    setState(() {
-      backGroundColor = Colors.green;
-    });
+    // title =
+    //     await methodChannel.invokeMethod('FlutterToNative', {"type": "221133"});
+    // setState(() {
+    //   backGroundColor = Colors.green;
+    // });
+    /// 使用flutter boost 向iOS发送消息
+    Map<String, dynamic> tmp = Map<String, dynamic>();
+    tmp["type"] = "221133";
+    try {
+      FlutterBoost.singleton.channel
+          .sendEvent('FlutterToNativeWithFlutterBoost', tmp);
+    } catch (e) {}
   }
 
   _MethodDemoState() {
-    //Native调用Dart方法
-    methodChannel.setMethodCallHandler((MethodCall call) {
-      if (call.method == "NativeToFlutter") {
+    FlutterBoost.singleton.channel.addEventListener('ToFlutterWithFlutterBoost',
+        (name, arguments) {
+      //todo
+      if (name == "ToFlutterWithFlutterBoost") {
         setState(() {
-          title = call.arguments;
+          title = arguments["key"];
           backGroundColor = Colors.yellow;
         });
       }
-      return Future<dynamic>.value();
+      return;
     });
+
+    // //Native调用Dart方法
+    // methodChannel.setMethodCallHandler((MethodCall call) {
+    //   if (call.method == "NativeToFlutter") {
+    //     setState(() {
+    //       title = call.arguments;
+    //       backGroundColor = Colors.yellow;
+    //     });
+    //   }
+    //   return Future<dynamic>.value();
+    // });
   }
 
   @override
