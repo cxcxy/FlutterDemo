@@ -13,18 +13,20 @@ import flutter_boost
 // Used to connect plugins (only if you have plugins with iOS platform code).
 import FlutterPluginRegistrant
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: FlutterAppDelegate {
     var flutterEngine : FlutterEngine?;
-    var window: UIWindow?
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+//    var window: UIWindow?
+    
+    var paramsMap: Dictionary<String, String> = [:]
+    
+    override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        self.flutterEngine = FlutterEngine(name: "io.flutter", project: nil);
-                      
-        self.flutterEngine?.run(withEntrypoint: nil);
-                      
-        GeneratedPluginRegistrant.register(with: self.flutterEngine as! FlutterEngine);
+//        self.flutterEngine = FlutterEngine(name: "io.flutter", project: nil);
+//
+//        self.flutterEngine?.run(withEntrypoint: nil);
+//
+//        GeneratedPluginRegistrant.register(with: self.flutterEngine as! FlutterEngine);
         
 //        PlatformRouterImp *router = [PlatformRouterImp new];
 //         [FlutterBoostPlugin.sharedInstance startFlutterWithPlatform:router
@@ -34,6 +36,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //         UITabBarController *tabVC = [[UITabBarController alloc] init];
 //         UINavigationController *rvc = [[UINavigationController alloc] initWithRootViewController:tabVC];
 //         router.navigationController = rvc;
+        
+//        GeneratedPluginRegistrant.register(with: self)
+        if let nav = window?.rootViewController as? UINavigationController {
+//            let controller: FlutterViewController = nav.topViewController as! FlutterViewController
+//
+//            let methodChannel = FlutterMethodChannel.init(name: "samples.flutter.io/battery", binaryMessenger: controller.binaryMessenger)
+//
+//            methodChannel.setMethodCallHandler { (call, result) in
+//                if "getLoginCode" == call.method && !self.paramsMap.isEmpty {
+//                    result(self.paramsMap["code"])
+//                    self.paramsMap.removeAll()
+//                }
+//            }
+        }
+
+
+
+        
+        
         let router = PlatformRouterImp.init()
         FlutterBoostPlugin.sharedInstance().startFlutter(with: router) { (engine) in
             print("engine",engine)
@@ -50,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 //           GeneratedPluginRegistrant.register(with: self)
         
-        return true
+        return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
 
