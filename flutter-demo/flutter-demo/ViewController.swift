@@ -40,7 +40,7 @@ class ViewController: UIViewController {
     @IBAction func clickToFlutterAction(_ sender: Any) {
         
         let vc = FLBFlutterViewContainer.init();
-        vc.setName("first", params:  ["key1": "Flutter打开Native"]);
+        vc.setName("billInfo", params:  ["key1": "Flutter打开Native"]);
         // 使用 methodChannel 和 Dart 进行通信
         messageChannel = FlutterMethodChannel.init(name: "com.pages.your/native_get", binaryMessenger: vc.binaryMessenger)
         messageChannel?.setMethodCallHandler { (call, result) in
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
             }
         }
         nativeToFlutter()
-        FlutterBoostPlugin.open("first", urlParams: ["key1": "Flutter打开Native"], exts: ["animated": true], onPageFinished: { (result) in
+        FlutterBoostPlugin.open("billInfo", urlParams: ["key1": "Flutter打开Native"], exts: ["animated": true], onPageFinished: { (result) in
             print("call me when page finished, and your result is:", result)
         }) { (completion) in
             print("page is opened")
