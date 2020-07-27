@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_boost/flutter_boost.dart';
 import '../page/page_bill.dart';
 import '../page/safe_area.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
@@ -11,6 +12,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
+
     FlutterBoost.singleton.registerPageBuilders({
       'first': (pageName, params, _) => MethodDemo(),
       'billInfo': (pageName, params, _) => BillInfo(),
@@ -20,10 +22,21 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // ScreenUtil.init(context, width: 750, height: 1334);
     return MaterialApp(
         title: 'Flutter Boost example',
         builder: FlutterBoost.init(),
-        home: Container(color: Colors.white));
+        home: MaterialAppDemo());
+  }
+}
+
+class MaterialAppDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    //Set the fit size (fill in the screen size of the device in the design) If the design is based on the size of the iPhone6 ​​(iPhone6 ​​750*1334)
+    /// 引入的 ScreenUtil 框架只能包在 StatelessWidget 的  build 方法里面
+    ScreenUtil.init(context, width: 750, height: 1624, allowFontScaling: false);
+    return Container(color: Colors.white);
   }
 }
 

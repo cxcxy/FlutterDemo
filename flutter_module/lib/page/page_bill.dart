@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_boost/flutter_boost.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BillInfo extends StatefulWidget {
   BillInfo({Key key}) : super(key: key);
@@ -132,7 +133,7 @@ class BillInfoList extends StatelessWidget {
       child: Column(
         children: <Widget>[
           SizedBox(
-            height: 62,
+            height: 62.h,
           ),
           new ClipOval(
             child: Image.network(
@@ -142,7 +143,7 @@ class BillInfoList extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 12,
+            height: 12.h,
           ),
           Text(
             '欧阳娜娜',
@@ -152,7 +153,7 @@ class BillInfoList extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 5,
+            height: 5.h,
           ),
           Text(
             '这是您在天目传奇的消费账单，请核实后兑付',
@@ -162,7 +163,7 @@ class BillInfoList extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 50,
+            height: 50.h,
           ),
           Text(
             '12000.00',
@@ -173,7 +174,7 @@ class BillInfoList extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 5,
+            height: 5.h,
           ),
           Text('支付剩余时间'),
           SizedBox(
