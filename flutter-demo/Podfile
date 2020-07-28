@@ -7,7 +7,10 @@ target 'flutter-demo' do
 	use_frameworks!
   install_all_flutter_pods(flutter_application_path)
 #  pod 'flutter_ios_text_lib', :path => '../flutter_ios_text_lib'
-  pod 'Moya'
+  	pod 'Moya'
+  	pod 'ObjectMapper'
+	pod 'SwiftyJSON'
+        pod 'SVProgressHUD', :git => 'https://github.com/Fidetro/SVProgressHUD.git'
 end
 
 post_install do |installer|

@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -20,22 +21,6 @@ class _BillInfoState extends State<BillInfo> {
   static const MethodChannel methodChannel =
       const MethodChannel('com.pages.your/native_get');
 
-  //Dart调用Native方法，并接收返回值。
-  _iOSPushToVC() async {
-    // title =
-    //     await methodChannel.invokeMethod('FlutterToNative', {"type": "221133"});
-    // setState(() {
-    //   backGroundColor = Colors.green;
-    // });
-    /// 使用flutter boost 向iOS发送消息
-    Map<String, dynamic> tmp = Map<String, dynamic>();
-    tmp["type"] = "221133";
-    try {
-      FlutterBoost.singleton.channel
-          .sendEvent('FlutterToNativeWithFlutterBoost', tmp);
-    } catch (e) {}
-  }
-
   _BillInfoState() {
     FlutterBoost.singleton.channel.addEventListener('ToFlutterWithFlutterBoost',
         (name, arguments) {
@@ -49,7 +34,6 @@ class _BillInfoState extends State<BillInfo> {
       return;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,18 +71,82 @@ class _BillInfoState extends State<BillInfo> {
   }
 }
 
-class PayBtn extends StatelessWidget {
-  const PayBtn({Key key}) : super(key: key);
+class PayBtn extends StatefulWidget {
+  PayBtn({Key key}) : super(key: key);
+
+  @override
+  _PayBtnState createState() => _PayBtnState();
+}
+
+class _PayBtnState extends State<PayBtn> {
+  String title = '立即兑付';
+  // 注册一个通知
+  static const MethodChannel methodChannel =
+      const MethodChannel('com.pages.your/native_get');
+//Dart调用Native方法，并接收返回值。
+  flutterFromNativeValue() async {
+    /// 使用flutter boost 向iOS发送消息
+    Map<String, dynamic> tmp = Map<String, dynamic>();
+    tmp["url"] = "pmiapi/public/apiversion";
+    tmp["req"] = "";
+    title = await methodChannel.invokeMethod(
+        'FlutterToNativeWithFlutterBoost', tmp);
+    print(title);
+    // setState(() {
+    //   //   // title = arguments["remark"][0];
+    //   //   title = title["version"];
+    //   //   // backGroundColor = Colors.yellow;
+    // });
+    // try {
+    //   FlutterBoost.singleton.channel
+    //       .sendEvent('FlutterToNativeWithFlutterBoost', tmp);
+    // } catch (e) {}
+  }
+
+  _PayBtnState() {
+    // FlutterBoost.singleton.channel.addEventListener('ToFlutterWithFlutterBoost',
+    //     (name, arguments) {
+    //   //todo
+    //   if (name == "ToFlutterWithFlutterBoost") {
+    //     print(arguments);
+    //     setState(() {
+    //       // title = arguments["remark"][0];
+    //       title = arguments["version"];
+    //       // backGroundColor = Colors.yellow;
+    //     });
+    //   }
+    //   return;
+    // });
+  }
 
   @override
   Widget build(BuildContext context) {
+    // //Native调用Dart方法
+    // methodChannel.setMethodCallHandler((MethodCall call) {
+    //   if (call.method == "ToFlutterWithFlutterBoost") {
+    //     setState(() {
+    //       title = call.arguments["version"];
+    //       // backGroundColor = Colors.yellow;
+    //     });
+    //   }
+    //   return Future<dynamic>.value();
+    // });
     return Container(
       child: new Container(
         margin: new EdgeInsets.fromLTRB(15, 10, 15, 44),
         alignment: Alignment.center,
-        child: Text(
-          "立即兑付",
-          style: TextStyle(color: Colors.white),
+        child: RaisedButton(
+          child: Text(title),
+          onPressed: () {
+            print("objecthahahah3a333r");
+            // FlutterBoost.singleton.open("TwoViewController", urlParams: {
+            //   "test": "flutter to flutter22222211113呃呃呃呃3 "
+            // }).then((Map value) {
+            //   print(
+            //       "call me when page is finished. did recieve native route result $value");
+            // });
+            flutterFromNativeValue();
+          },
         ),
         decoration: new BoxDecoration(
           color: Color.fromRGBO(193, 0, 24, 1),
@@ -133,7 +181,7 @@ class BillInfoList extends StatelessWidget {
       child: Column(
         children: <Widget>[
           SizedBox(
-            height: 62.h,
+            height: 62,
           ),
           new ClipOval(
             child: Image.network(
@@ -143,7 +191,7 @@ class BillInfoList extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 12.h,
+            height: 12,
           ),
           Text(
             '欧阳娜娜',
@@ -153,7 +201,7 @@ class BillInfoList extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 5.h,
+            height: 5,
           ),
           Text(
             '这是您在天目传奇的消费账单，请核实后兑付',
@@ -163,7 +211,7 @@ class BillInfoList extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 50.h,
+            height: 50,
           ),
           Text(
             '12000.00',
@@ -174,7 +222,7 @@ class BillInfoList extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 5.h,
+            height: 5,
           ),
           Text('支付剩余时间'),
           SizedBox(

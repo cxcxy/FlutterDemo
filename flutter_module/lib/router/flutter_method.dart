@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
         title: 'Flutter Boost example',
         builder: FlutterBoost.init(),
-        home: MaterialAppDemo());
+        home: BillInfo());
   }
 }
 
@@ -121,25 +121,25 @@ class TestHello extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Center(
-        child: RaisedButton(
-      child: Text(title),
-      onPressed: () {
-        debugPrint("objecthahahaha");
-        FlutterBoost.singleton.open("TwoViewController", urlParams: {
-          "test": "flutter to flutter22222211113呃呃呃呃3 "
-        }).then((Map value) {
-          print(
-              "call me when page is finished. did recieve native route result $value");
-        });
-      },
-    )
+      child: RaisedButton(
+        child: Text(title),
+        onPressed: () {
+          debugPrint("objecthahahaha");
+          FlutterBoost.singleton.open("TwoViewController", urlParams: {
+            "test": "flutter to flutter22222211113呃呃呃呃3 "
+          }).then((Map value) {
+            print(
+                "call me when page is finished. did recieve native route result $value");
+          });
+        },
+      ),
 
-        // Text(
-        //   'hello3',
-        //   textDirection: TextDirection.ltr, // 文字阅读方向
-        //   style: TextStyle(
-        //       fontSize: 40, fontWeight: FontWeight.bold, color: Colors.yellow),
-        // ),
-        );
+      // Text(
+      //   'hello3',
+      //   textDirection: TextDirection.ltr, // 文字阅读方向
+      //   style: TextStyle(
+      //       fontSize: 40, fontWeight: FontWeight.bold, color: Colors.yellow),
+      // ),
+    );
   }
 }

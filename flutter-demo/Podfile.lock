@@ -13,7 +13,10 @@ PODS:
   - Moya/Core (13.0.1):
     - Alamofire (~> 4.1)
     - Result (~> 4.1)
+  - ObjectMapper (4.2.0)
   - Result (4.1.0)
+  - SVProgressHUD (2.2.5)
+  - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
   - Flutter (from `../flutter_module/.ios/Flutter/engine`)
@@ -21,12 +24,17 @@ DEPENDENCIES:
   - flutter_module (from `../flutter_module/.ios/Flutter`)
   - FlutterPluginRegistrant (from `../flutter_module/.ios/Flutter/FlutterPluginRegistrant`)
   - Moya
+  - ObjectMapper
+  - SVProgressHUD (from `https://github.com/Fidetro/SVProgressHUD.git`)
+  - SwiftyJSON
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - Moya
+    - ObjectMapper
     - Result
+    - SwiftyJSON
 
 EXTERNAL SOURCES:
   Flutter:
@@ -37,6 +45,13 @@ EXTERNAL SOURCES:
     :path: "../flutter_module/.ios/Flutter"
   FlutterPluginRegistrant:
     :path: "../flutter_module/.ios/Flutter/FlutterPluginRegistrant"
+  SVProgressHUD:
+    :git: https://github.com/Fidetro/SVProgressHUD.git
+
+CHECKOUT OPTIONS:
+  SVProgressHUD:
+    :commit: 7bf91f617a72d68e303584163332bfdf04dbe73a
+    :git: https://github.com/Fidetro/SVProgressHUD.git
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
@@ -45,8 +60,11 @@ SPEC CHECKSUMS:
   flutter_module: 37f078337caf8acad3074374a49bf81442fd3e07
   FlutterPluginRegistrant: 717df6b322c7d500c17eeff54284c74ed5410c7b
   Moya: f4a4b80ff2f8a4ffc208dfb31cd91636622fee6e
+  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 3df80d922a6f6721e7555b8900d41c2a9d11e62b
+PODFILE CHECKSUM: ee19535d5eeb25924bed77b0f47b3159fb4e0dab
 
 COCOAPODS: 1.9.3
