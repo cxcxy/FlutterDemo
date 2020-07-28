@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_boost/flutter_boost.dart';
 import '../page/page_bill.dart';
 import '../page/safe_area.dart';
+import '../page/content_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,14 +11,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
   void initState() {
-    super.initState();
-
     FlutterBoost.singleton.registerPageBuilders({
       'first': (pageName, params, _) => MethodDemo(),
       'billInfo': (pageName, params, _) => BillInfo(),
       'safeArea': (pageName, params, _) => SafeAreaDemo(),
+      'contentPage': (pageName, params, _) => ContentPage(),
     });
+    super.initState();
   }
 
   @override

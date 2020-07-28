@@ -32,6 +32,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_screenutil: ^2.3.0
+  bmprogresshud: ^0.0.7
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
   flutter_boost:

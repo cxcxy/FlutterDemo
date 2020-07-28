@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_boost/flutter_boost.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 
 class BillInfo extends StatefulWidget {
   BillInfo({Key key}) : super(key: key);
@@ -16,24 +17,10 @@ class BillInfo extends StatefulWidget {
 class _BillInfoState extends State<BillInfo> {
   String title = 'Flutter to Native';
   Color backGroundColor = Colors.red;
-
 // 注册一个通知
   static const MethodChannel methodChannel =
       const MethodChannel('com.pages.your/native_get');
 
-  _BillInfoState() {
-    FlutterBoost.singleton.channel.addEventListener('ToFlutterWithFlutterBoost',
-        (name, arguments) {
-      //todo
-      if (name == "ToFlutterWithFlutterBoost") {
-        setState(() {
-          title = arguments["key"];
-          // backGroundColor = Colors.yellow;
-        });
-      }
-      return;
-    });
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,54 +70,49 @@ class _PayBtnState extends State<PayBtn> {
   // 注册一个通知
   static const MethodChannel methodChannel =
       const MethodChannel('com.pages.your/native_get');
+  // 取消监听
+  VoidCallback _listenCancelable;
+  handleMsg(String name, Map params) {
+    if (name == "ToFlutterWithFlutterBoost") {
+      title = params["version"];
+      setState(() {});
+    }
+  }
+
 //Dart调用Native方法，并接收返回值。
   flutterFromNativeValue() async {
     /// 使用flutter boost 向iOS发送消息
     Map<String, dynamic> tmp = Map<String, dynamic>();
     tmp["url"] = "pmiapi/public/apiversion";
-    tmp["req"] = "";
-    title = await methodChannel.invokeMethod(
-        'FlutterToNativeWithFlutterBoost', tmp);
-    print(title);
-    // setState(() {
-    //   //   // title = arguments["remark"][0];
-    //   //   title = title["version"];
-    //   //   // backGroundColor = Colors.yellow;
-    // });
-    // try {
-    //   FlutterBoost.singleton.channel
-    //       .sendEvent('FlutterToNativeWithFlutterBoost', tmp);
-    // } catch (e) {}
+    tmp["req"] = Map<String, dynamic>();
+    try {
+      FlutterBoost.singleton.channel
+          .sendEvent('FlutterToNativeWithFlutterBoost', tmp);
+    } catch (e) {}
   }
 
-  _PayBtnState() {
-    // FlutterBoost.singleton.channel.addEventListener('ToFlutterWithFlutterBoost',
-    //     (name, arguments) {
-    //   //todo
-    //   if (name == "ToFlutterWithFlutterBoost") {
-    //     print(arguments);
-    //     setState(() {
-    //       // title = arguments["remark"][0];
-    //       title = arguments["version"];
-    //       // backGroundColor = Colors.yellow;
-    //     });
-    //   }
-    //   return;
-    // });
+  @override
+  void initState() {
+    //flutter部分接收数据，dart代码
+    _listenCancelable?.call();
+
+    /// 在wight 中 只能出现一个  ToFlutterWithFlutterBoost 的监听，否则第二次会传递不过来
+    _listenCancelable = FlutterBoost.singleton.channel
+        .addEventListener("ToFlutterWithFlutterBoost", (name, arguments) async {
+      // return handleMsg(name, arguments);
+      // if (name == "ToFlutterWithFlutterBoost") {
+      var msg = arguments["message"];
+      if (msg != null) {
+        title = msg;
+        setState(() {});
+      }
+      return null;
+    });
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // //Native调用Dart方法
-    // methodChannel.setMethodCallHandler((MethodCall call) {
-    //   if (call.method == "ToFlutterWithFlutterBoost") {
-    //     setState(() {
-    //       title = call.arguments["version"];
-    //       // backGroundColor = Colors.yellow;
-    //     });
-    //   }
-    //   return Future<dynamic>.value();
-    // });
     return Container(
       child: new Container(
         margin: new EdgeInsets.fromLTRB(15, 10, 15, 44),
@@ -138,7 +120,7 @@ class _PayBtnState extends State<PayBtn> {
         child: RaisedButton(
           child: Text(title),
           onPressed: () {
-            print("objecthahahah3a333r");
+            // print("objecthahahah3a333r");
             // FlutterBoost.singleton.open("TwoViewController", urlParams: {
             //   "test": "flutter to flutter22222211113呃呃呃呃3 "
             // }).then((Map value) {
