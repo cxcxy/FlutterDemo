@@ -187,7 +187,7 @@ class XBNetManager {
         
 //        requestProvider.request(<#T##target: RequestApi##RequestApi#>, completion: <#T##Completion##Completion##(Result<Response, MoyaError>) -> Void#>)
         
-    let task_log = "request target： \n请求的URL：\(target.path))\n请求的参数：\(target.task.getTaskParams())\n"
+    let task_log = "request target： \n请求的URL：\(target.path)\n请求的参数：\(target.task.getTaskParams())\n"
         print("target",task_log)
         _ =  requestProvider.request(target) { (result) in
             if isDissmissLoding {

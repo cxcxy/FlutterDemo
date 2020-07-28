@@ -101,7 +101,7 @@ class _PayBtnState extends State<PayBtn> {
         .addEventListener("ToFlutterWithFlutterBoost", (name, arguments) async {
       // return handleMsg(name, arguments);
       // if (name == "ToFlutterWithFlutterBoost") {
-      var msg = arguments["message"];
+      var msg = arguments["version"];
       if (msg != null) {
         title = msg;
         setState(() {});
@@ -109,6 +109,13 @@ class _PayBtnState extends State<PayBtn> {
       return null;
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // 取消监听 要加上取消监听，否则会造成内存泄露 在Xcode中有输出相关日志
+    _listenCancelable.call();
+    super.dispose();
   }
 
   @override
@@ -120,13 +127,6 @@ class _PayBtnState extends State<PayBtn> {
         child: RaisedButton(
           child: Text(title),
           onPressed: () {
-            // print("objecthahahah3a333r");
-            // FlutterBoost.singleton.open("TwoViewController", urlParams: {
-            //   "test": "flutter to flutter22222211113呃呃呃呃3 "
-            // }).then((Map value) {
-            //   print(
-            //       "call me when page is finished. did recieve native route result $value");
-            // });
             flutterFromNativeValue();
           },
         ),

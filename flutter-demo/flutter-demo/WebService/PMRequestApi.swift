@@ -75,7 +75,8 @@ extension RequestApi:TargetType{
             params_task = req
             break
          case .api_flutter(url: let url, req: let req):
-            params_task = req
+            params_task = formatDic(dic: req)
+//            params_task = req
             break
         }
         return .requestParameters(parameters: params_task,

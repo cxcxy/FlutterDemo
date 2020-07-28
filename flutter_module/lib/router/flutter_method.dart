@@ -4,6 +4,8 @@ import 'package:flutter_boost/flutter_boost.dart';
 import '../page/page_bill.dart';
 import '../page/safe_area.dart';
 import '../page/content_page.dart';
+import '../page/page_InheritedWidget.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,6 +20,7 @@ class _HomePageState extends State<HomePage> {
       'billInfo': (pageName, params, _) => BillInfo(),
       'safeArea': (pageName, params, _) => SafeAreaDemo(),
       'contentPage': (pageName, params, _) => ContentPage(),
+      'billInfoRequest': (pageName, params, _) => InheritedWidgetTestRoute(),
     });
     super.initState();
   }
@@ -28,7 +31,7 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
         title: 'Flutter Boost example',
         builder: FlutterBoost.init(),
-        home: BillInfo());
+        home: InheritedWidgetTestRoute());
   }
 }
 
