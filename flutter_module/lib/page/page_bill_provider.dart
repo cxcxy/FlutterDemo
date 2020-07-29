@@ -1,9 +1,5 @@
 import 'package:provider/provider.dart';
-// 一个通用的InheritedWidget，保存任需要跨组件共享的状态
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
-// import './page_bill.dart';
 import 'package:flutter_boost/flutter_boost.dart';
 
 class BillProviderDemo extends StatelessWidget {
@@ -17,27 +13,61 @@ class BillProviderDemo extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: ProvidePage(title: 'Provider 测试页面'),
+        home: ProvidePage(),
       ),
     );
   }
 }
 
-class ProvidePage extends StatelessWidget {
-  final String title;
+class ProvidePage extends StatefulWidget {
+  ProvidePage({Key key}) : super(key: key);
 
-  ProvidePage({Key key, this.title}) : super(key: key);
+  @override
+  _ProvidePageState createState() => _ProvidePageState();
+}
+
+class _ProvidePageState extends State<ProvidePage> {
+  // 取消监听
+  VoidCallback _listenCancelable;
+//Dart调用Native方法，并接收返回值。
+  flutterFromNativeValue() async {
+    /// 使用flutter boost 向iOS发送消息
+    Map<String, dynamic> tmp = Map<String, dynamic>();
+    tmp["url"] = "pmiapi/public/share/getinfobyauthcode";
+    tmp["req"] = {'authCode': '12122fa931c14eaf'};
+    // {authCode: "12122fa931c14eaf"}
+    try {
+      FlutterBoost.singleton.channel
+          .sendEvent('FlutterToNativeWithFlutterBoost', tmp);
+    } catch (e) {}
+  }
+
+  @override
+  void initState() {
+    //flutter部分接收数据，dart代码
+    _listenCancelable?.call();
+
+    /// 在wight 中 只能出现一个  ToFlutterWithFlutterBoost 的监听，否则第二次会传递不过来
+    _listenCancelable = FlutterBoost.singleton.channel
+        .addEventListener("ToFlutterWithFlutterBoost", (name, arguments) async {
+      Provider.of<BillInfoModel>(context).setTmpValue(arguments);
+
+      return null;
+    });
+    flutterFromNativeValue();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // 取消监听 要加上取消监听，否则会造成内存泄露 在Xcode中有输出相关日志
+    _listenCancelable.call();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    print("ProvidePage build");
-    // 获取 CounterNotifier 数据 （最简单的方式）
-    final counter = Provider.of<BillInfoModel>(context);
-
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text(title),
-      // ),
       body: SafeArea(
         child: SizedBox.expand(
           child: new Container(
@@ -67,24 +97,9 @@ class ProvidePage extends StatelessWidget {
           ),
         ),
       ),
-      // Center(
-      //   child: Column(
-      //     mainAxisSize: MainAxisSize.min,
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: <Widget>[
-      //       Text(
-      //         '按下按钮，使数字增长:',
-      //       ),
-      //       Text(
-      //         '${counter.count}',
-      //         style: Theme.of(context).textTheme.display1,
-      //       ),
-      //     ],
-      //   ),
-      // ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          counter.increment();
+          // counter.increment();
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
@@ -95,66 +110,12 @@ class ProvidePage extends StatelessWidget {
 
 class PayBtn extends StatefulWidget {
   PayBtn({Key key}) : super(key: key);
-
   @override
   _PayBtnState createState() => _PayBtnState();
 }
 
 class _PayBtnState extends State<PayBtn> {
   String title = '立即兑付';
-
-  // 取消监听
-  VoidCallback _listenCancelable;
-  handleMsg(String name, Map params) {
-    if (name == "ToFlutterWithFlutterBoost") {
-      title = params["version"];
-      setState(() {});
-    }
-  }
-
-//Dart调用Native方法，并接收返回值。
-  flutterFromNativeValue() async {
-    /// 使用flutter boost 向iOS发送消息
-    Map<String, dynamic> tmp = Map<String, dynamic>();
-    tmp["url"] = "pmiapi/public/share/getinfobyauthcode";
-    tmp["req"] = {'authCode': '12122fa931c14eaf'};
-    // {authCode: "12122fa931c14eaf"}
-    try {
-      FlutterBoost.singleton.channel
-          .sendEvent('FlutterToNativeWithFlutterBoost', tmp);
-    } catch (e) {}
-  }
-
-  @override
-  void initState() {
-    //flutter部分接收数据，dart代码
-    _listenCancelable?.call();
-
-    /// 在wight 中 只能出现一个  ToFlutterWithFlutterBoost 的监听，否则第二次会传递不过来
-    _listenCancelable = FlutterBoost.singleton.channel
-        .addEventListener("ToFlutterWithFlutterBoost", (name, arguments) async {
-      // return handleMsg(name, arguments);
-      // if (name == "ToFlutterWithFlutterBoost") {
-      // var msg = arguments["version"];
-      // if (msg != null) {
-      //   title = msg;
-      //   setState(() {});
-      // }
-      Provider.of<BillInfoModel>(context).setTmpValue(arguments);
-
-      return null;
-    });
-    flutterFromNativeValue();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    // 取消监听 要加上取消监听，否则会造成内存泄露 在Xcode中有输出相关日志
-    _listenCancelable.call();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -163,8 +124,9 @@ class _PayBtnState extends State<PayBtn> {
         alignment: Alignment.center,
         child: RaisedButton(
           child: Text(title),
+          color: Colors.white,
           onPressed: () {
-            flutterFromNativeValue();
+            // flutterFromNativeValue();
           },
         ),
         decoration: new BoxDecoration(
@@ -186,7 +148,6 @@ Widget redBox = DecoratedBox(
 
 class BillInfoList extends StatelessWidget {
   const BillInfoList({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final counter = Provider.of<BillInfoModel>(context);
@@ -262,16 +223,10 @@ class BillInfoList extends StatelessWidget {
 //  核心：继承自ChangeNotifier
 // 这种文件本来应该单独放在一个类文件连的
 class BillInfoModel with ChangeNotifier {
-  // int _count = 0;
-  // Map<String, dynamic> tmp = Map<String, dynamic>();
-  // tmp["version"] = "rrr";
   Map tmp = {'version': 'a1', 'b': 'b1'};
-  //  tmp["url"] = "pmiapi/public/apiversion";
-  // int get count => _count;
   dynamic getValue(key) => tmp[key];
   increment() {
-    // _count++;
-    // 核心方法，通知刷新UI,调用build方法
+    // 核心，知刷新UI,调用build方法
     notifyListeners();
   }
 
