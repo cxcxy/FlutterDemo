@@ -83,7 +83,7 @@ class ViewController: UIViewController {
         //            }
         //        }
         //        nativeToFlutter()
-        FlutterBoostPlugin.open("billInfoRequest", urlParams: ["key1": "Flutter打开Native"], exts: ["animated": true], onPageFinished: { (result) in
+        FlutterBoostPlugin.open("BillProviderDemo", urlParams: ["key1": "Flutter打开Native"], exts: ["animated": true], onPageFinished: { (result) in
             print("call me when page finished, and your result is:", result)
         }) { (completion) in
             print("page is opened")

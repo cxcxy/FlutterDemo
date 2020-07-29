@@ -63,7 +63,7 @@ class XBDataModel: Mappable {
  */
 class XBBaseReqModel:NSObject, Mappable {
     var privatefield : String? = "" //客户端生成的唯一序号
-    var requestId    : String = ""//请求唯一ID（保证每次提交ID不能重复 最长32位）
+//    var requestId    : String = ""//请求唯一ID（保证每次提交ID不能重复 最长32位）
     //var reqtime    : String? = Date.init().toString(format: "yyyy-MM-dd HH:mm:ss")//请求时间
     var reqtime      : String? = ""///请求时间
     
@@ -85,7 +85,7 @@ class XBBaseReqModel:NSObject, Mappable {
     func mapping(map: Map) {
 
         privatefield <- map["privatefield"]
-        requestId <- map["requestId"]
+//        requestId <- map["requestId"]
         reqtime <- map["reqtime"]
         
         sign <- map["sign"]

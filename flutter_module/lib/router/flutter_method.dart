@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_boost/flutter_boost.dart';
+import 'package:flutter_module/page/page_provider.dart';
 import '../page/page_bill.dart';
 import '../page/safe_area.dart';
 import '../page/content_page.dart';
 import '../page/page_InheritedWidget.dart';
+import '../page/page_providersdk.dart';
+import '../page/page_bill_provider.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -20,7 +23,10 @@ class _HomePageState extends State<HomePage> {
       'billInfo': (pageName, params, _) => BillInfo(),
       'safeArea': (pageName, params, _) => SafeAreaDemo(),
       'contentPage': (pageName, params, _) => ContentPage(),
-      'billInfoRequest': (pageName, params, _) => InheritedWidgetTestRoute(),
+      'InheritedWidgetTestRoute': (pageName, params, _) =>
+          InheritedWidgetTestRoute(),
+      'ProviderSDKDemo': (pageName, params, _) => ProviderSDKDemo(),
+      'BillProviderDemo': (pageName, params, _) => BillProviderDemo(),
     });
     super.initState();
   }
@@ -31,7 +37,7 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
         title: 'Flutter Boost example',
         builder: FlutterBoost.init(),
-        home: InheritedWidgetTestRoute());
+        home: BillProviderDemo());
   }
 }
 
