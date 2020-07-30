@@ -70,7 +70,7 @@ class AppDelegate: FlutterAppDelegate {
 //        });
 
 //           GeneratedPluginRegistrant.register(with: self)
-        
+        FlutterManager.share.addBillInfoAction()
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 

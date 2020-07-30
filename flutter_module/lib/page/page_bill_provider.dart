@@ -42,16 +42,21 @@ class _ProvidePageState extends State<ProvidePage> {
     } catch (e) {}
   }
 
+  showViewToNative() {
+    try {
+      FlutterBoost.singleton.channel.sendEvent('showView', {});
+    } catch (e) {}
+  }
+
   @override
   void initState() {
     //flutter部分接收数据，dart代码
     _listenCancelable?.call();
 
     /// 在wight 中 只能出现一个  ToFlutterWithFlutterBoost 的监听，否则第二次会传递不过来
-    _listenCancelable = FlutterBoost.singleton.channel
-        .addEventListener("ToFlutterWithFlutterBoost", (name, arguments) async {
+    _listenCancelable = FlutterBoost.singleton.channel.addEventListener(
+        "pmiapi/public/share/getinfobyauthcode", (name, arguments) async {
       Provider.of<BillInfoModel>(context).setTmpValue(arguments);
-
       return null;
     });
     flutterFromNativeValue();
@@ -97,13 +102,6 @@ class _ProvidePageState extends State<ProvidePage> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // counter.increment();
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
     );
   }
 }
@@ -116,6 +114,14 @@ class PayBtn extends StatefulWidget {
 
 class _PayBtnState extends State<PayBtn> {
   String title = '立即兑付';
+  showViewToNative() {
+    print("showView");
+    try {
+      FlutterBoost.singleton.channel
+          .sendEvent('FlutterToNativeWithFlutterBoost', {'showView': true});
+    } catch (e) {}
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -126,7 +132,7 @@ class _PayBtnState extends State<PayBtn> {
           child: Text(title),
           color: Colors.white,
           onPressed: () {
-            // flutterFromNativeValue();
+            showViewToNative();
           },
         ),
         decoration: new BoxDecoration(

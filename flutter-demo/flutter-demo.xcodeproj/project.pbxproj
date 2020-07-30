@@ -21,6 +21,11 @@
 		04C38C7724B8639F005B6BC5 /* TwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C38C7524B8639F005B6BC5 /* TwoViewController.swift */; };
 		04C38C7824B8639F005B6BC5 /* TwoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C38C7624B8639F005B6BC5 /* TwoViewController.xib */; };
 		04C842AC24BD54130091BFAA /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C842AB24BD54080091BFAA /* libc++.tbd */; };
+		04E95B1724D26EC8008EEF8C /* FlutterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E95B1624D26EC8008EEF8C /* FlutterManager.swift */; };
+		04E95B1B24D292AC008EEF8C /* ETPopupViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E95B1924D292AC008EEF8C /* ETPopupViewExtension.swift */; };
+		04E95B1C24D292AC008EEF8C /* ETPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E95B1A24D292AC008EEF8C /* ETPopupView.swift */; };
+		04E95B1F24D292CB008EEF8C /* XBLoginOutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E95B1D24D292CB008EEF8C /* XBLoginOutView.xib */; };
+		04E95B2024D292CB008EEF8C /* XBLoginOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E95B1E24D292CB008EEF8C /* XBLoginOutView.swift */; };
 		C33C615F8FE5BA9C36D378A4 /* Pods_flutter_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAED055396DEF8C6B916FAA /* Pods_flutter_demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +52,11 @@
 		04C842B124BD5AA20091BFAA /* flutter_boost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = flutter_boost.framework; path = ../flutter_ios_text_lib/ios_frameworks/flutter_boost.framework; sourceTree = "<group>"; };
 		04C842B524BD5B230091BFAA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		04C842B724BD5B310091BFAA /* flutter_ios_text_lib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = flutter_ios_text_lib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		04E95B1624D26EC8008EEF8C /* FlutterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlutterManager.swift; sourceTree = "<group>"; };
+		04E95B1924D292AC008EEF8C /* ETPopupViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ETPopupViewExtension.swift; sourceTree = "<group>"; };
+		04E95B1A24D292AC008EEF8C /* ETPopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ETPopupView.swift; sourceTree = "<group>"; };
+		04E95B1D24D292CB008EEF8C /* XBLoginOutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XBLoginOutView.xib; sourceTree = "<group>"; };
+		04E95B1E24D292CB008EEF8C /* XBLoginOutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XBLoginOutView.swift; sourceTree = "<group>"; };
 		37C4D30DAB9EAEABDE84F044 /* Pods-flutter-demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flutter-demo.release.xcconfig"; path = "Target Support Files/Pods-flutter-demo/Pods-flutter-demo.release.xcconfig"; sourceTree = "<group>"; };
 		3BAED055396DEF8C6B916FAA /* Pods_flutter_demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flutter_demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -96,12 +106,16 @@
 		0487C88924B70058002FDA9C /* flutter-demo */ = {
 			isa = PBXGroup;
 			children = (
+				04E95B1824D292AC008EEF8C /* ETPopView */,
 				0434560324CE81B8006994A9 /* WebService */,
 				04C38C6E24B8526F005B6BC5 /* flutter-boost */,
 				0487C88A24B70058002FDA9C /* AppDelegate.swift */,
 				0487C88E24B70058002FDA9C /* ViewController.swift */,
+				04E95B1624D26EC8008EEF8C /* FlutterManager.swift */,
 				04C38C7524B8639F005B6BC5 /* TwoViewController.swift */,
 				04C38C7624B8639F005B6BC5 /* TwoViewController.xib */,
+				04E95B1E24D292CB008EEF8C /* XBLoginOutView.swift */,
+				04E95B1D24D292CB008EEF8C /* XBLoginOutView.xib */,
 				0487C89024B70058002FDA9C /* Main.storyboard */,
 				0487C89624B7005D002FDA9C /* Assets.xcassets */,
 				0487C89824B7005D002FDA9C /* LaunchScreen.storyboard */,
@@ -118,6 +132,15 @@
 				04C38C7124B85281005B6BC5 /* flutter-demo-Bridging-Header.h */,
 			);
 			path = "flutter-boost";
+			sourceTree = "<group>";
+		};
+		04E95B1824D292AC008EEF8C /* ETPopView */ = {
+			isa = PBXGroup;
+			children = (
+				04E95B1924D292AC008EEF8C /* ETPopupViewExtension.swift */,
+				04E95B1A24D292AC008EEF8C /* ETPopupView.swift */,
+			);
+			path = ETPopView;
 			sourceTree = "<group>";
 		};
 		8EC46AF44BA5B91A264565FD /* Frameworks */ = {
@@ -207,6 +230,7 @@
 				0487C89A24B7005D002FDA9C /* LaunchScreen.storyboard in Resources */,
 				0487C89724B7005D002FDA9C /* Assets.xcassets in Resources */,
 				0487C89224B70058002FDA9C /* Main.storyboard in Resources */,
+				04E95B1F24D292CB008EEF8C /* XBLoginOutView.xib in Resources */,
 				04C38C7824B8639F005B6BC5 /* TwoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,6 +300,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04E95B1C24D292AC008EEF8C /* ETPopupView.swift in Sources */,
+				04E95B2024D292CB008EEF8C /* XBLoginOutView.swift in Sources */,
+				04E95B1B24D292AC008EEF8C /* ETPopupViewExtension.swift in Sources */,
+				04E95B1724D26EC8008EEF8C /* FlutterManager.swift in Sources */,
 				04C38C7724B8639F005B6BC5 /* TwoViewController.swift in Sources */,
 				0434560B24CEA955006994A9 /* FlutterNetManager.swift in Sources */,
 				0487C88F24B70058002FDA9C /* ViewController.swift in Sources */,

@@ -1,3 +1,4 @@
+source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
 install! 'cocoapods',:deterministic_uuids => false
 flutter_application_path = '../flutter_module'
@@ -10,6 +11,7 @@ target 'flutter-demo' do
   	pod 'Moya'
   	pod 'ObjectMapper'
 	pod 'SwiftyJSON'
+  pod 'SnapKit'
         pod 'SVProgressHUD', :git => 'https://github.com/Fidetro/SVProgressHUD.git'
 end
 

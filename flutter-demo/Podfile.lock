@@ -15,6 +15,7 @@ PODS:
     - Result (~> 4.1)
   - ObjectMapper (4.2.0)
   - Result (4.1.0)
+  - SnapKit (4.2.0)
   - SVProgressHUD (2.2.5)
   - SwiftyJSON (5.0.0)
 
@@ -25,10 +26,13 @@ DEPENDENCIES:
   - FlutterPluginRegistrant (from `../flutter_module/.ios/Flutter/FlutterPluginRegistrant`)
   - Moya
   - ObjectMapper
+  - SnapKit
   - SVProgressHUD (from `https://github.com/Fidetro/SVProgressHUD.git`)
   - SwiftyJSON
 
 SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - SnapKit
   trunk:
     - Alamofire
     - Moya
@@ -62,9 +66,10 @@ SPEC CHECKSUMS:
   Moya: f4a4b80ff2f8a4ffc208dfb31cd91636622fee6e
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: ee19535d5eeb25924bed77b0f47b3159fb4e0dab
+PODFILE CHECKSUM: 733b6c6757dee3fa485a160f66033d4ed8933ca1
 
 COCOAPODS: 1.9.3
