@@ -8,6 +8,7 @@ import '../page/content_page.dart';
 import '../page/page_InheritedWidget.dart';
 import '../page/page_providersdk.dart';
 import '../page/page_bill_provider.dart';
+import '../page/page_future.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -27,6 +28,7 @@ class _HomePageState extends State<HomePage> {
           InheritedWidgetTestRoute(),
       'ProviderSDKDemo': (pageName, params, _) => ProviderSDKDemo(),
       'BillProviderDemo': (pageName, params, _) => BillProviderDemo(),
+      'FutureWidgetDemo': (pageName, params, _) => FutureDemo(),
     });
     super.initState();
   }
@@ -36,11 +38,21 @@ class _HomePageState extends State<HomePage> {
     // ScreenUtil.init(context, width: 750, height: 1334);
     return MaterialApp(
         title: 'Flutter Boost example',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
         builder: FlutterBoost.init(),
-        home: BillProviderDemo());
+        home: FutureDemo());
   }
 }
 
+// MaterialApp(
+//         title: 'Privoder Demo',
+//         theme: ThemeData(
+//           primarySwatch: Colors.blue,
+//         ),
+//         home: ProvidePage(),
+//       ),
 class MaterialAppDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
